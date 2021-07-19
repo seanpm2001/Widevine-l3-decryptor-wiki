@@ -114,7 +114,7 @@ root:
 ```
 The `encrypted_client_id` is AES-encrypted using a so-called privacy key which is encrypted itself (`encrypted_privacy_key`), together with an IV from `encrypted_client_id_iv`.
 
-Luckily, the code that does this privacy encryption is not considered sensative at all, and it's not even obfuscated. In fact, it's easy to see it is done from the CDM's `crypto/encryptor.cc` source file, and we can extract the key by finding and hooking [OpenSSL's aes_init_key function](https://github.com/openssl/openssl/blob/master/crypto/evp/e_aes.c#L2285) (which is called from `EVP_CipherInit_ex`).
+Luckily, the code that does this privacy encryption is not considered sensative at all, and it's not even obfuscated. In fact, it's easy to see it is done from the CDM's `crypto/encryptor.cc` source file, and we can extract the key by finding and hooking [OpenSSL's aes_init_key function](https://github.com/openssl/openssl/blob/d9c29baf1a23d2be17b9b4ab8f7b4fe43dd74454/crypto/evp/e_aes.c#L2301) (which is called from `EVP_CipherInit_ex`).
 
 After decrypting the client indentification buffer we can just see the public key in the `device_certificate` encoded in ASN.1 DER:
 ```
@@ -217,7 +217,7 @@ At this point we have a 2048-bit number that was generated from the input buffer
 ## Diving into the RSA implementation
 It's time to dig in and reverse the actual whitebox RSA algorithm.
 
-In case you're not familiar with modern implementations of RSA, what we're expecting to see here in the end is a modular exponentiation of our giant number using a [square-and-multiply algorithm](https://en.wikipedia.org/wiki/Exponentiation_by_squaring). This is not going to be an oridianry algortihm though, because a whitebox algorithm means we're expecting a twist (probably involving tables) which makes figuring out the key harder.
+In case you're not familiar with modern implementations of RSA, what we're expecting to see here in the end is a modular exponentiation of our giant number using a [square-and-multiply algorithm](https://en.wikipedia.org/wiki/Exponentiation_by_squaring). This is not going to be an ordinary algortihm though, because a whitebox algorithm means we're expecting a twist (probably involving tables) which makes figuring out the key harder.
 
 ### Doing math with big numbers and the montgomery method
 So again, at the point where we have passed through the `EMSA_PSS_ENCODE` step and we have the 2048-bit base number that is going to get raised to some power, we can again simply set an access breakpoint on the buffer where the number is stored to see what is getting done next.
