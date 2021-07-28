@@ -1,7 +1,7 @@
 
 This write-up describes the process that was done reversing [Widevine](https://en.wikipedia.org/wiki/Widevine)'s *old* Windows CDM (`widevinecdm.dll` 4.10.1610.0) to bypass its protection and extract its RSA private key. Knowing the private key could eventually lead to the decryption of media content keys for L3. 
 
-Everything is for educational purposes only, and most of the techniques described here will <ins>**NOT**</ins> work against newer versions of the CDM anyway since it had gone through a major refactoring, i.e obfuscation techniques & algorithms were changed. If all you care about is ripping videos, please look elsewhere.
+Everything is for educational purposes only, and the techniques described here will <ins>**NOT**</ins> work against newer versions of the CDM anyway since it had gone through a major refactoring, i.e obfuscation techniques & algorithms were changed. If all you care about is ripping videos, please look elsewhere.
 
 Before talking about the private key extraction, we'll see why it's needed.
 
