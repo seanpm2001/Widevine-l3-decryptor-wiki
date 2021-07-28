@@ -614,7 +614,7 @@ After doing the above preparations, `R_do_rsa_preparations` ends and we return t
 
 And now, after the preparations, to the part where the real exponentiation actually happens. `R_rsa_core` is given the array of the 32 sums (or polynomials) that we just computed (`sums_table`).
 
-The functions itself is pretty simple (again, after de-obfuscation): It's just a `info->coreIterationsCount` iterations loop that multiplies a number 6 times in every iteration:
+The function itself is pretty simple (again, after de-obfuscation): It's just a `info->coreIterationsCount` iterations loop that multiplies a number 6 times in every iteration:
 
 <img src="https://user-images.githubusercontent.com/11458759/112755056-b6ade880-8fe7-11eb-9d68-ee9f99ba87c1.PNG">
 
