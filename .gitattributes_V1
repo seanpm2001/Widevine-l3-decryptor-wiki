@@ -1,0 +1,16 @@
+# Start of script
+# .gitattributes
+# This file defines what languages can show up in the GitHub linguist menu (the menu that tells you what percentage each language is using up on this project.
+# Some non-programming languages must be included manually with this file. Want to create your own? Do something similar to what is done here, and name the file
+# .gitattributes
+# and nothing else, no characters before, no characters after
+# Start of linguist script
+# Markdown
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+# End of linguist script
+# File info
+# File type: .gitattributes file
+# File version: 1 (Monday, 2021 November 15th at 8:06 pm)
+# Line count (including blank lines and compiler line): 17
+# End of script
